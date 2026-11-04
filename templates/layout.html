@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{title}} · Fabrick Lab</title>
+  <link rel="stylesheet" href="/style.css">
+  {{{sdkScript}}}
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/">
+        <span class="brandmark">f<span>·</span></span>
+        <span>Fabrick <em>Lab</em></span>
+      </a>
+      <div class="top-right">
+        <span class="environment"><i></i> SANDBOX</span>
+        <a href="{{docsUrl}}"
+           target="_blank" rel="noopener">Docs ↗</a>
+      </div>
+    </header>
+    {{{content}}}
+    <footer>
+      <span>Un laboratorio locale per Payment Orchestra</span>
+      <span>Nessun dato di carta passa da questa app</span>
+    </footer>
+  </div>
+  <script defer src="/client.js"></script>
+</body>
+</html>

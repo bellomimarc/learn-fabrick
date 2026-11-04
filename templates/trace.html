@@ -1,0 +1,20 @@
+<details class="trace" {{open}}>
+  <summary>
+    <span class="trace-number">{{number}}</span>
+    <span>
+      <strong>{{title}}</strong>
+      <small>{{method}} {{path}} · HTTP {{httpStatus}}</small>
+    </span>
+    <span class="chevron">⌄</span>
+  </summary>
+  <div class="trace-body">
+    <div>
+      <span class="code-label">RICHIESTA · {{method}} {{path}}</span>
+      <pre>{{requestJson}}</pre>
+    </div>
+    <div>
+      <span class="code-label">RISPOSTA</span>
+      <pre>{{responseJson}}</pre>
+    </div>
+  </div>
+</details>

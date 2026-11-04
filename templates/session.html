@@ -1,0 +1,60 @@
+<main class="session-main">
+  <a class="back" href="/">← Torna alle transazioni</a>
+  <div class="session-hero">
+    <div>
+      <span class="eyebrow">{{kindHeading}}</span>
+      <h1>Transazione <span>{{paymentID}}</span></h1>
+      <p>{{createdAt}} · {{shopTransactionID}}</p>
+    </div>
+    <span class="badge {{statusClass}}">{{statusLabel}}</span>
+  </div>
+
+  {{{note}}}
+  {{{softDecline}}}
+
+  <div class="session-grid">
+    <section>
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ESPERIENZA CLIENTE</span>
+          <h2>{{checkoutHeading}}</h2>
+        </div>
+      </div>
+      {{{checkout}}}
+      {{{testCard}}}
+      <div class="panel outcome">
+        <div>
+          <span class="step-number">✓</span>
+          <div>
+            <h3>Verifica l’esito</h3>
+            <p>{{resultMessage}}</p>
+          </div>
+        </div>
+        <a class="button secondary" href="/sessions/{{paymentID}}?refresh=1">
+          Aggiorna da payment/detail ↻
+        </a>
+      </div>
+      {{{nextPanel}}}
+    </section>
+
+    <aside>
+      <div class="section-heading">
+        <div><span class="eyebrow">DATI TRANSAZIONE</span><h2>Riepilogo</h2></div>
+      </div>
+      <div class="panel facts">{{{facts}}}</div>
+      <div class="aside-hint">
+        <strong>Fonte di verità</strong>
+        <p>La callback e il redirect informano l’interfaccia. Conferma l’esito con
+           <code>payment/detail</code>. Uno stato PENDING o WAITING non è definitivo.</p>
+      </div>
+    </aside>
+  </div>
+
+  <section class="api-log">
+    <div class="section-heading">
+      <div><span class="eyebrow">DIETRO LE QUINTE</span><h2>Chiamate API</h2></div>
+      <span class="section-note">La chiave API non viene mostrata.</span>
+    </div>
+    <div class="panel trace-list">{{{traces}}}</div>
+  </section>
+</main>

@@ -1,0 +1,130 @@
+<main>
+  <section class="hero">
+    <div>
+      <span class="eyebrow">PAYMENT ORCHESTRA / INTEGRATION PLAYGROUND</span>
+      <h1>Esplora i pagamenti,<br><span>passo dopo passo.</span></h1>
+      <p>Crea una sessione nel sandbox, prova il checkout ospitato e osserva ogni
+         chiamata dal server all’esito finale.</p>
+      <div class="hero-chips">
+        <span>01 · Configura</span>
+        <span>02 · Paga</span>
+        <span>03 · Verifica</span>
+        <span>04 · Riutilizza il token</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-head">
+        <span>STATO DEL LAB</span>
+        <span class="badge {{configClass}}">{{configLabel}}</span>
+      </div>
+      <div class="config-line"><span>Ambiente</span><strong>Sandbox Fabrick</strong></div>
+      <div class="config-line"><span>Shop Login</span><strong>{{shopLabel}}</strong></div>
+      <div class="config-line"><span>API Key</span><strong>{{apiLabel}}</strong></div>
+      <div class="hero-card-foot">{{configHint}}</div>
+    </div>
+  </section>
+
+  <div class="section-heading">
+    <div><span class="eyebrow">NUOVA PROVA</span><h2>Scegli cosa testare</h2></div>
+    <span class="section-note">Le carte si inseriscono solo nell’interfaccia Fabrick.</span>
+  </div>
+
+  <section class="workspace-grid">
+    <div class="panel form-panel">
+      <div class="panel-header">
+        <span class="step-number">01</span>
+        <div>
+          <h3>Imposta la transazione</h3>
+          <p>I parametri vengono inviati a <code>payment/create</code>.</p>
+        </div>
+      </div>
+      <form action="/payments" method="post" id="payment-form">
+        <input type="hidden" name="csrf" value="{{csrf}}">
+        <div class="field">
+          <span>Scenario</span>
+          <div class="segmented" role="group" aria-label="Scenario">
+            <label>
+              <input type="radio" name="kind" value="oneoff" checked>
+              <span>Singolo</span>
+            </label>
+            <label>
+              <input type="radio" name="kind" value="scheduledFirst">
+              <span>Ricorrente fisso</span>
+            </label>
+            <label>
+              <input type="radio" name="kind" value="unscheduledFirst">
+              <span>Ricorrente variabile</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-two">
+          <label class="field">
+            <span>Importo iniziale · EUR</span>
+            <input name="amount" value="10.00" inputmode="decimal" required>
+          </label>
+          <label class="field">
+            <span>Checkout</span>
+            <select name="method">
+              <option value="lightbox">Lightbox</option>
+              <option value="component">Web Component</option>
+            </select>
+          </label>
+        </div>
+        <div class="recurring-fields" hidden>
+          <div class="form-two">
+            <label class="field">
+              <span>Importo massimo autorizzato · EUR</span>
+              <input name="authAmount" value="10.00" inputmode="decimal">
+            </label>
+            <div class="field help">
+              <span>Perché serve?</span>
+              <p>Il primo pagamento autentica il cliente e genera il token per gli
+                 addebiti successivi.</p>
+            </div>
+          </div>
+          <div class="scheduled-fields form-two">
+            <label class="field">
+              <span>Frequenza minima · giorni</span>
+              <input name="frequency" value="30" type="number" min="1" max="365">
+            </label>
+            <label class="field">
+              <span>Scadenza accordo</span>
+              <input name="expiry" value="{{expiry}}" type="date">
+            </label>
+          </div>
+        </div>
+        <button class="button primary" type="submit" {{submitDisabled}}>
+          Crea sessione di pagamento <span>↗</span>
+        </button>
+        <p class="form-hint">L’app chiama Fabrick dal server. La chiave API non
+           viene inviata al browser.</p>
+      </form>
+    </div>
+
+    <aside class="panel explainer">
+      <span class="step-number dark">i</span>
+      <h3>Come funziona</h3>
+      <div class="timeline">
+        <div><b>1</b><span><strong>Crea</strong><small>Il server chiama
+          <code>payment/create</code> e riceve paymentID e paymentToken.</small></span></div>
+        <div><b>2</b><span><strong>Presenta</strong><small>Lightbox o Web Component
+          mostra il checkout Fabrick nel browser.</small></span></div>
+        <div><b>3</b><span><strong>Controlla</strong><small>Il server legge
+          <code>payment/detail</code> per confermare l’esito.</small></span></div>
+        <div><b>4</b><span><strong>Ripeti</strong><small>Per una serie ricorrente,
+          il server usa il token nel successivo <code>payment/submit</code>.</small></span></div>
+      </div>
+      <a class="text-link"
+         href="{{recurringDocsUrl}}"
+         target="_blank" rel="noopener">Guida ufficiale alla ricorrenza ↗</a>
+    </aside>
+  </section>
+
+  <section class="history">
+    <div class="section-heading">
+      <div><span class="eyebrow">ATTIVITÀ</span><h2>Transazioni di questa sessione</h2></div>
+      <span class="section-note">Si azzerano quando riavvii il server.</span>
+    </div>
+    <div class="panel transaction-list">{{{history}}}</div>
+  </section>
+</main>

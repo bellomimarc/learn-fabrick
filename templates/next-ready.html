@@ -1,0 +1,13 @@
+<p>Token recuperato e primo pagamento approvato. Puoi simulare un addebito
+   senza cliente presente.</p>
+<form action="/payments/next" method="post">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <input type="hidden" name="firstPaymentID" value="{{paymentID}}">
+  <label class="field">
+    <span>Importo del prossimo addebito · EUR</span>
+    <input name="amount" value="{{amount}}" inputmode="decimal" required>
+  </label>
+  <button class="button primary" type="submit">
+    Esegui addebito via token <span>↗</span>
+  </button>
+</form>
