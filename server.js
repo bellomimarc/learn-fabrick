@@ -267,6 +267,7 @@ async function submitNext(session, token) {
       body,
     });
     session.submit = result.data;
+    console.log(`[SUBMIT NEXT] Result for payment submission: ${JSON.stringify(result)}`);
     session.traces.push(trace('Addebita con il token', 'POST', path, request, result));
   } catch (error) {
     session.traces.push({
